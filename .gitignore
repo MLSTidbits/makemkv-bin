@@ -12,4 +12,6 @@ version
 md5sums
 
 _build/
-src/out/
+tmp/
+
+build-stamp
