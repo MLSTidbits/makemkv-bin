@@ -1,5 +1,15 @@
 include makefile.common
 include mmccextr/mmccextr.mak
+include libdriveio/libdriveio.mk
+include libebml/libebml.mk
+include libmatroska/libmatroska.mk
+include sstring/sstring.mk
+include libabi/libabi.mk
+include makemkvgui/makemkvgui.mk
+include libffabi/libffabi.mk
+include libmakemkv/libmakemkv.mk
+include libmmbd/libmmbd.mk
+include mmgpl/mmgpl.mk
 
 GCC=gcc
 GXX=g++ -std=c++11
@@ -21,6 +31,8 @@ OBJCOPY=objcopy
 LD=/usr/bin/ld -m elf_x86_64
 BUILDINFO_ARCH_NAME=$(shell $(GCC) -dumpmachine)
 BUILDINFO_BUILD_DATE=$(shell date)
+
+MMGPL_DEF=
 
 top_srcdir ?= .
 INCF=-I$(top_srcdir)/
