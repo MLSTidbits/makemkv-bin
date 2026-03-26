@@ -44,17 +44,7 @@ LIBMAKEMKV_INC=libmakemkv/inc
 LIBMAKEMKV_SRC=libmakemkv/src/ebmlwrite.cpp libmakemkv/src/libmkv.cpp libmakemkv/src/version.cpp libmakemkv/src/world.cpp \
     libmakemkv/src/stdstring.cpp
 
-MAKEMKVGUI_INC=makemkvgui/inc
-
-MAKEMKVGUI_GEN=\
-  tmp/moc_mainwnd.cpp tmp/moc_logtext.cpp tmp/moc_dirselectbox.cpp tmp/moc_aboutbox.cpp tmp/moc_settingdlg.cpp \
-  tmp/moc_backupdlg.cpp tmp/moc_lineeditk.cpp tmp/moc_dvdbox.cpp tmp/moc_drivebox.cpp tmp/moc_toolbuttonp.cpp \
-  tmp/moc_regbox.cpp
-
-MAKEMKVGUI_SRC_LINUX=makemkvgui/src/api_posix.cpp makemkvgui/src/api_linux.cpp makemkvgui/src/sem_posix.cpp \
-  makemkvgui/src/spawn_posix.cpp makemkvgui/src/logic_posix.cpp libabi/src/sys_linux.cpp makemkvgui/src/api_posix_shm.cpp \
-  makemkvgui/src/notify_linux.cpp makemkvgui/src/image_linux.cpp \
-  tmp/image_data.o
+MAKEMKV_INC=makemkvgui/inc
 
 LIBMMBD_INC=libmmbd/inc
 
