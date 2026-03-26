@@ -29,70 +29,98 @@ ifeq ($(ENABLE_DEBUG),no)
 STRIP_FLAGS=--strip-all --strip-debug --strip-unneeded --discard-all
 CFLAGS=-O2 -D_linux_ -Wno-deprecated-declarations
 CXXFLAGS=-O2
+FINALISE=strip
+else
+FINALISE=copy
 endif
 
-LIBABI_OBJ := $(patsubst %,tmp/%.o,$(LIBABI_SRC))
+LIBABI_OBJ   := $(patsubst %,tmp/%.o,$(LIBABI_SRC))
 LIBFFABI_OBJ := $(patsubst %,tmp/%.o,$(LIBFFABI_SRC))
-MMCCX_SRC := $(patsubst %,mmccextr/%,$(MMCCEXTR_SRC))
+MMCCX_SRC    := $(patsubst %,mmccextr/%,$(MMCCEXTR_SRC))
 
-.PHONY: all clean install
+.PHONY: all clean install \
+	_build/libdriveio.so.0 \
+	_build/libmakemkv.so.1\
+	_build/libmmbd.so.0\
+	_build/mmccextr\
+	_build/mmgplsrv
 
-all: clean-build out/libdriveio.so.0 out/libmakemkv.so.1 out/libmmbd.so.0 out/mmccextr out/mmgplsrv
-
-clean-build:
-	@rm -rf tmp
-	@rm -f libdriveio/libdriveio.so.0.full
-	@rm -f libmakemkv/libmakemkv.so.1.full
-	@rm -f libmmbd/libmmbd.so.0.full
-	@rm -f mmccextr/mmccextr.full
-	@rm -f mmgpl/mmgplsrv.full
+all: _build/libdriveio.so.0 _build/libmakemkv.so.1 _build/libmmbd.so.0 _build/mmccextr _build/mmgplsrv
 
 clean:
-	@rm -rf out tmp
-	@rm -f libdriveio/libdriveio.so.0.full
-	@rm -f libmakemkv/libmakemkv.so.1.full
-	@rm -f libmmbd/libmmbd.so.0.full
-	@rm -f mmccextr/mmccextr.full
-	@rm -f mmgpl/mmgplsrv.full
+	@rm -vrf _build tmp
+	@rm -vf libdriveio/libdriveio.so.0.full
+	@rm -vf libmakemkv/libmakemkv.so.1.full
+	@rm -vf libmmbd/libmmbd.so.0.full
+	@rm -vf mmccextr/mmccextr.full
+	@rm -vf mmgpl/mmgplsrv.full
 
-install: out/libdriveio.so.0 out/libmakemkv.so.1 out/libmmbd.so.0 out/mmccextr out/mmgplsrv
-	$(INSTALL) -D -m 644 out/libdriveio.so.0 $(DESTDIR)$(libdir)/libdriveio.so.0
-	$(INSTALL) -D -m 644 out/libmakemkv.so.1 $(DESTDIR)$(libdir)/libmakemkv.so.1
-	$(INSTALL) -D -m 644 out/libmmbd.so.0 $(DESTDIR)$(libdir)/libmmbd.so.0
+install: _build/libdriveio.so.0 _build/libmakemkv.so.1 _build/libmmbd.so.0 _build/mmccextr _build/mmgplsrv
+	$(INSTALL) -D -m 644 _build/libdriveio.so.0  $(DESTDIR)$(libdir)/libdriveio.so.0
+	$(INSTALL) -D -m 644 _build/libmakemkv.so.1  $(DESTDIR)$(libdir)/libmakemkv.so.1
+	$(INSTALL) -D -m 644 _build/libmmbd.so.0     $(DESTDIR)$(libdir)/libmmbd.so.0
 ifeq ($(DESTDIR),)
 	ldconfig
 endif
-	$(INSTALL) -D -m 755 out/mmccextr $(DESTDIR)$(bindir)/mmccextr
-	$(INSTALL) -D -m 755 out/mmgplsrv $(DESTDIR)$(bindir)/mmgplsrv
+	$(INSTALL) -D -m 755 _build/mmccextr         $(DESTDIR)$(bindir)/mmccextr
+	$(INSTALL) -D -m 755 _build/mmgplsrv         $(DESTDIR)$(bindir)/mmgplsrv
 
-# Strip unstripped binaries from source dirs into out/
-out/libdriveio.so.0: libdriveio/libdriveio.so.0.full
-	@mkdir -p out
-	@echo "  \e[1;33mSTRIP\e[0m  $@"
-	@$(OBJCOPY) $(STRIP_FLAGS) $< $@
+# ── Finalise — strip (release) or copy (debug) into _build/ ──────────────── #
 
-out/libmakemkv.so.1: libmakemkv/libmakemkv.so.1.full
-	@mkdir -p out
-	@echo "  \e[1;33mSTRIP\e[0m  $@"
+_build/libdriveio.so.0: libdriveio/libdriveio.so.0.full
+	@mkdir -p _build
+ifeq ($(FINALISE),strip)
+	@echo "\e[1;33mSTRIP\e[0m  $@"
 	@$(OBJCOPY) $(STRIP_FLAGS) $< $@
+else
+	@echo "\e[1;34mCOPY\e[0m   $@"
+	@cp $< $@
+endif
 
-out/libmmbd.so.0: libmmbd/libmmbd.so.0.full
-	@mkdir -p out
-	@echo "  \e[1;33mSTRIP\e[0m  $@"
+_build/libmakemkv.so.1: libmakemkv/libmakemkv.so.1.full
+	@mkdir -p _build
+ifeq ($(FINALISE),strip)
+	@echo "\e[1;33mSTRIP\e[0m  $@"
 	@$(OBJCOPY) $(STRIP_FLAGS) $< $@
+else
+	@echo "\e[1;34mCOPY\e[0m   $@"
+	@cp $< $@
+endif
 
-out/mmccextr: mmccextr/mmccextr.full
-	@mkdir -p out
-	@echo "  \e[1;33mSTRIP\e[0m  $@"
+_build/libmmbd.so.0: libmmbd/libmmbd.so.0.full
+	@mkdir -p _build
+ifeq ($(FINALISE),strip)
+	@echo "\e[1;33mSTRIP\e[0m  $@"
 	@$(OBJCOPY) $(STRIP_FLAGS) $< $@
+else
+	@echo "\e[1;34mCOPY\e[0m   $@"
+	@cp $< $@
+endif
 
-out/mmgplsrv: mmgpl/mmgplsrv.full
-	@mkdir -p out
-	@echo "  \e[1;33mSTRIP\e[0m  $@"
+_build/mmccextr: mmccextr/mmccextr.full
+	@mkdir -p _build
+ifeq ($(FINALISE),strip)
+	@echo "\e[1;33mSTRIP\e[0m  $@"
 	@$(OBJCOPY) $(STRIP_FLAGS) $< $@
+else
+	@echo "\e[1;34mCOPY\e[0m   $@"
+	@cp $< $@
+endif
+
+_build/mmgplsrv: mmgpl/mmgplsrv.full
+	@mkdir -p _build
+ifeq ($(FINALISE),strip)
+	@echo "\e[1;33mSTRIP\e[0m  $@"
+	@$(OBJCOPY) $(STRIP_FLAGS) $< $@
+else
+	@echo "\e[1;34mCOPY\e[0m   $@"
+	@cp $< $@
+endif
+
+# ── Compile unstripped binaries into source directories ───────────────────── #
 
 libdriveio/libdriveio.so.0.full: tmp/gen_buildinfo.h
-	@echo "  \e[1;32mLD\e[0m  $@"
+	@echo "\e[1;32mLD\e[0m  $@"
 	@$(GXX) $(CXXFLAGS) \
 		$(CFLAGS) \
 		$(LDFLAGS) \
@@ -110,7 +138,7 @@ libdriveio/libdriveio.so.0.full: tmp/gen_buildinfo.h
 
 tmp/%.c.o: %.c
 	@mkdir -p $(dir $@)
-	@echo "  \e[1;32mCC\e[0m  $@"
+	@echo "\e[1;32mCC\e[0m  $<"
 	@$(GCC) -c $(CFLAGS) \
 		$(NO_EC_DEF) \
 		-D_GNU_SOURCE \
@@ -122,7 +150,7 @@ tmp/%.c.o: %.c
 		-fPIC $<
 
 libmakemkv/libmakemkv.so.1.full: tmp/gen_buildinfo.h $(LIBABI_OBJ) $(LIBFFABI_OBJ)
-	@echo "  \e[1;32mLD\e[0m  $@"
+	@echo "\e[1;32mLD\e[0m  $@"
 	@$(GXX) $(CXXFLAGS) \
 		$(CFLAGS) \
 		$(LDFLAGS) \
@@ -152,7 +180,7 @@ libmakemkv/libmakemkv.so.1.full: tmp/gen_buildinfo.h $(LIBABI_OBJ) $(LIBFFABI_OB
 		-lc -lstdc++ -lcrypto -lz -lexpat $(FFMPEG_LIBS) -lm -lrt
 
 libmmbd/libmmbd.so.0.full: tmp/gen_buildinfo.h $(LIBABI_OBJ) $(LIBFFABI_OBJ)
-	@echo "  \e[1;32mLD\e[0m  $@"
+	@echo "\e[1;32mLD\e[0m  $@"
 	@$(GXX) $(CXXFLAGS) \
 		$(CFLAGS) \
 		$(LDFLAGS) \
@@ -175,12 +203,12 @@ libmmbd/libmmbd.so.0.full: tmp/gen_buildinfo.h $(LIBABI_OBJ) $(LIBFFABI_OBJ)
 		-lc -lstdc++ -lrt -lpthread -lcrypto -ldl
 
 mmccextr/mmccextr.full: $(MMCCX_SRC) tmp/gen_buildinfo.h
-	@echo "  \e[1;32mCC\e[0m  $@"
+	@echo "\e[1;32mCC\e[0m  $@"
 	@$(GCC) $(CFLAGS) $(LDFLAGS) $(MMCCEXTR_DEF) -DHAVE_BUILDINFO_H -Itmp -D_GNU_SOURCE -o$@ $(MMCCX_SRC) -lc \
 	-ffunction-sections -Wl,--gc-sections -Wl,-z,defs
 
 mmgpl/mmgplsrv.full: $(MMGPL_SRC) tmp/gen_buildinfo.h
-	@echo "  \e[1;32mCC\e[0m  $@"
+	@echo "\e[1;32mCC\e[0m  $@"
 	@$(GCC) $(CFLAGS) \
 	$(LDFLAGS) \
 	$(INCF)$(MMGPL_INC) \
@@ -196,9 +224,9 @@ mmgpl/mmgplsrv.full: $(MMGPL_SRC) tmp/gen_buildinfo.h
 	$(MMGPL_SRC_LINUX) -lc -lstdc++ \
 	-ffunction-sections -Wl,--gc-sections -Wl,-z,defs
 
+# ── Build info header ─────────────────────────────────────────────────────── #
+
 tmp/gen_buildinfo.h:
 	@mkdir -p tmp
 	@printf '#define BUILDINFO_ARCH_NAME "%s"\n#define BUILDINFO_BUILD_DATE "%s"\n' \
 		"$(BUILDINFO_ARCH_NAME)" "$(BUILDINFO_BUILD_DATE)" > $@
-
-
