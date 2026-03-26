@@ -1,16 +1,60 @@
-Source: template
+Source: makemkv-bin
 Section: unknown
 Priority: optional
 Maintainer: Michael <michaelleeschaecher@gmail.com>
 Build-Depends: debhelper-compat (= 13), autotools-dev
 Standards-Version: 4.6.0
-Homepage: <insert the upstream URL, if relevant>
+Homepage: https://www.makemkv.com/
 #Vcs-Browser: https://salsa.debian.org/debian/template
 #Vcs-Git: https://salsa.debian.org/debian/template.git
 Rules-Requires-Root: no
 
-Package: template
-Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: <insert up to 60 chars description>
- <insert long description, indented with spaces>
+Package: makemkv-eula
+Architecture: amd64
+Description: MakeMKV End User License Agreement
+ This package contains the End User License Agreement (EULA) for MakeMKV. It is
+ required to be installed alongside the makemkv-bin package to ensure that users
+ have access to the terms and conditions governing the use of MakeMKV software.
+
+Package: makemkv-bin
+Architecture: amd64
+Depends: reel-(gtk|qt), makemkv-eula
+Description: MakeMKV binary package
+ MakeMKV is a software application that converts video clips from proprietary
+ disc formats to a set of MKV files, preserving most information but not
+ changing it in any way.
+
+Package: libmakemkv
+Architecture: amd64
+Depends: makemkv-bin
+Description: MakeMKV shared library
+ This package contains the shared library for MakeMKV, which provides the necessary
+ functionality for other applications to interact with MakeMKV. It allows developers
+ to integrate MakeMKV features into their own software, enabling users to access
+ MakeMKV's capabilities through third-party applications.
+
+Package: makemkv-docs
+Architecture: all
+Depends: makemkv-bin
+Description: MakeMKVCON documentation and manuals
+ This package contains the documentation and manuals for MakeMKVCON, the command-line
+ interface of MakeMKV. It provides users with detailed information on how to use the
+ command-line features of MakeMKV, including instructions, examples, and troubleshooting
+ tips.
+
+Package: sdftool-bin
+Architecture: amd64
+Depends: makemkv-eula, makemkv-bin
+Description: LibreDrive flashing tool for MakeMKV
+ sdftool is a software application that allows users to flash LibreDrive firmware
+ onto compatible devices. It provides a user-friendly interface for managing the
+ flashing process, ensuring that users can easily update their LibreDrive devices
+ with the latest firmware for improved performance and features.
+
+Package: sdftool-docs
+Architecture: all
+Depends: makemkv-sdftool
+Description: Documentation for the LibreDrive flashing tool
+ This package contains the documentation for the LibreDrive flashing tool, which is
+ used in conjunction with MakeMKV. It provides users with detailed instructions and
+ information on how to use the tool.
