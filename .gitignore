@@ -5,13 +5,31 @@ build/
 *.gz
 *.xz
 *.deb
-*.tar
 dist/
 changelog
 version
 md5sums
 
-_build/
-tmp/
+src/makemkv/tmp/
+
+debian/reel/
+debian/reel-common/
+debian/reel-gtk/
+debian/reel-qt/
+debian/libmakemkv/
+debian/makemkv-bin/
+debian/mmccextr/
+debian/mmgplsrv/
+out/
+makemkv/tmp/
+
+debian/.debhelper/
+
+debian/*.substvars
+debian/files
+
+__pycache__/
 
 build-stamp
+
+_build/

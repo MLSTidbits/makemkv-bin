@@ -1,0 +1,33 @@
+#!/bin/sh
+
+set -e
+
+EULA_URL="/usr/share/doc/makemkv-bin/eula"
+
+ROWS=$(tput lines)
+COLS=$(tput cols)
+
+case "$1" in
+    configure|upgrade                            )
+        # shellcheck disable=SC3046
+        source /etc/makemkv/eula.conf
+
+        if [ "$EULA_ACCEPTED" != "true" ]; then
+            whiptail --title "MakeMKV EULA" --textbox --scrolltext "$EULA_URL" "$ROWS" "$COLS"
+
+            if ! whiptail --title "MakeMKV EULA" --yesno "Do you accept the MakeMKV EULA?" 10 60 ; then
+                echo "EULA not accepted, aborting installation"
+                exit 1
+            fi
+
+        fi
+
+    ;;
+    failed-upgrade                               ) ;;
+    abort-upgrade|abort-deconfigure|abort-remove ) ;;
+    *                                            )
+        echo "Unsupported option $1" ; exit 1
+    ;;
+esac
+
+exit 0
