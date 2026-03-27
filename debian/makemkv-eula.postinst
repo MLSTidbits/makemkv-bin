@@ -18,6 +18,8 @@ case "$1" in
             if ! whiptail --title "MakeMKV EULA" --yesno "Do you accept the MakeMKV EULA?" 10 60 ; then
                 echo "EULA not accepted, aborting installation"
                 exit 1
+            else
+                echo "EULA_ACCEPTED=true" > /etc/makemkv/eula.conf
             fi
 
         fi
