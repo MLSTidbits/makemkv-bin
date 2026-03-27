@@ -1,4 +1,3 @@
-include makefile.common
 include mmccextr/mmccextr.mak
 include libdriveio/libdriveio.mk
 include libebml/libebml.mk
@@ -55,9 +54,10 @@ MMCCX_SRC    := $(patsubst %,mmccextr/%,$(MMCCEXTR_SRC))
 	_build/libmakemkv.so.1\
 	_build/libmmbd.so.0\
 	_build/mmccextr\
-	_build/mmgplsrv
+	_build/mmgplsrv \
+	_build/makemkvcon
 
-all: _build/libdriveio.so.0 _build/libmakemkv.so.1 _build/libmmbd.so.0 _build/mmccextr _build/mmgplsrv
+all: _build/libdriveio.so.0 _build/libmakemkv.so.1 _build/libmmbd.so.0 _build/mmccextr _build/mmgplsrv _build/makemkvcon
 
 clean:
 	@rm -vrf _build tmp
@@ -128,6 +128,11 @@ else
 	@echo "\e[1;34mCOPY\e[0m   $@"
 	@cp $< $@
 endif
+
+_build/makemkvcon:
+	@mkdir -p _build
+	@echo "\e[1;32mCOPY\e[0m   $@"
+	@cp bin/makemkvcon _build/
 
 # ── Compile unstripped binaries into source directories ───────────────────── #
 
@@ -242,3 +247,6 @@ tmp/gen_buildinfo.h:
 	@mkdir -p tmp
 	@printf '#define BUILDINFO_ARCH_NAME "%s"\n#define BUILDINFO_BUILD_DATE "%s"\n' \
 		"$(BUILDINFO_ARCH_NAME)" "$(BUILDINFO_BUILD_DATE)" > $@
+
+_build/makemkv-bin:
+	@cp bin/makemkvcon _build
