@@ -82,56 +82,56 @@ endif
 _build/libdriveio.so.0: libdriveio/libdriveio.so.0.full
 	@mkdir -p _build
 ifeq ($(FINALISE),strip)
-	@echo "\e[1;33mSTRIP\e[0m  $@"
+	@echo "\e[1;33mST\e[0m  $@"
 	@$(OBJCOPY) $(STRIP_FLAGS) $< $@
 else
-	@echo "\e[1;34mCOPY\e[0m   $@"
+	@echo "\e[1;34mCP\e[0m   $@"
 	@cp $< $@
 endif
 
 _build/libmakemkv.so.1: libmakemkv/libmakemkv.so.1.full
 	@mkdir -p _build
 ifeq ($(FINALISE),strip)
-	@echo "\e[1;33mSTRIP\e[0m  $@"
+	@echo "\e[1;33mST\e[0m  $@"
 	@$(OBJCOPY) $(STRIP_FLAGS) $< $@
 else
-	@echo "\e[1;34mCOPY\e[0m   $@"
+	@echo "\e[1;34mCP\e[0m   $@"
 	@cp $< $@
 endif
 
 _build/libmmbd.so.0: libmmbd/libmmbd.so.0.full
 	@mkdir -p _build
 ifeq ($(FINALISE),strip)
-	@echo "\e[1;33mSTRIP\e[0m  $@"
+	@echo "\e[1;33mST\e[0m  $@"
 	@$(OBJCOPY) $(STRIP_FLAGS) $< $@
 else
-	@echo "\e[1;34mCOPY\e[0m   $@"
+	@echo "\e[1;34mCP\e[0m   $@"
 	@cp $< $@
 endif
 
 _build/mmccextr: mmccextr/mmccextr.full
 	@mkdir -p _build
 ifeq ($(FINALISE),strip)
-	@echo "\e[1;33mSTRIP\e[0m  $@"
+	@echo "\e[1;33mST\e[0m  $@"
 	@$(OBJCOPY) $(STRIP_FLAGS) $< $@
 else
-	@echo "\e[1;34mCOPY\e[0m   $@"
+	@echo "\e[1;34mCP\e[0m   $@"
 	@cp $< $@
 endif
 
 _build/mmgplsrv: mmgpl/mmgplsrv.full
 	@mkdir -p _build
 ifeq ($(FINALISE),strip)
-	@echo "\e[1;33mSTRIP\e[0m  $@"
+	@echo "\e[1;33mST\e[0m  $@"
 	@$(OBJCOPY) $(STRIP_FLAGS) $< $@
 else
-	@echo "\e[1;34mCOPY\e[0m   $@"
+	@echo "\e[1;34mCP\e[0m   $@"
 	@cp $< $@
 endif
 
 _build/makemkvcon:
 	@mkdir -p _build
-	@echo "\e[1;32mCOPY\e[0m   $@"
+	@echo "\e[1;32mCP\e[0m  $@"
 	@cp bin/makemkvcon _build/
 
 # ── Compile unstripped binaries into source directories ───────────────────── #
