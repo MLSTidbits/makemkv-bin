@@ -3,28 +3,20 @@ Section: unknown
 Priority: optional
 Maintainer: Michael <michaelleeschaecher@gmail.com>
 Build-Depends: debhelper-compat (= 13), autotools-dev, libexpat1-dev, libavcodec-dev, zlib1g-dev,
- libavcodec-dev, boa, pandoc, dh-make, ffmpeg-dev
+ libavcodec-dev, boa, pandoc, dh-make
 Standards-Version: 4.6.0
 Homepage: https://www.makemkv.com/
 Vcs-Browser: https://github.com/MLSTidbits/makemkvcon
 #Vcs-Git: https://salsa.debian.org/debian/template.git
 Rules-Requires-Root: no
 
-Package: makemkvcon-eula
-Architecture: all
-Depends: reel
-Description: MakeMKV End User License Agreement
- MakeMKV End User License Agreement. This package is not intended to be installed
- on its own but is a dependency of makemkvcon. It contains the EULA document that
- users must agree to before using MakeMKV.
-
 Package: makemkvcon
-Architecture: and64
-Depends: reel, makemkv-eula
+Architecture: amd64
+Depends: reel, libmakemkv-oss
+Suggests: makemkvcon-docs, makemkv-sdftools, makemkv-firmware
 Description: MakeMKVCON is the command-line interface for MakeMKV
  MakeMKV is a format converter, otherwise known as "transcoder". It converts
  the video clips from proprietary (and usually encrypted) disc into a set of
- MKV files, preserving most information but not changing it in any way. The
  MKV format can store multiple video/audio tracks with all meta-information
  and preserve chapters. There are many players that can play MKV files nearly
  on all platforms, and there are tools to convert MKV files to many formats,
@@ -38,24 +30,24 @@ Description: Documentation for makemkvcon
  its own but is a dependency of makemkvcon. It contains the documentation files
  for makemkvcon.
 
-Package: libmakemkvcon
-Architecture: and64
+Package: libmakemkv-oss
+Architecture: amd64
 Depends: makemkvcon, reel
 Description: Library and binaries for makemkvcon used to decrypt video
- Library and binaries for makemkvcon used to decrypt video. This package is not
- intended to be installed on its own but is a dependency of makemkvcon. It contains
- the library files and binaries that makemkvcon uses to perform video decryption.
+ This package does not contain the MakeMKV GUI application, only the library and
+ helper binaries used by makemkvcon to decrypt video. Allowing use of third-party
+ a backend decryption applications.
 
-Package: libredrive-sdftools
-Architecture: and64
+Package: makemkv-sdftools
+Architecture: amd64
 Depends: makemkvcon
 Description: SDFTools is a application to flash LibreDrive firmware
  SDFTools is a application to flash LibreDrive firmware with compatible drives.
 
-Package: libredrive-firmware
+Package: makemkv-firmware
 Architecture: all
-Depends: libredrive-sdftools, makemkvcon
+Depends: makemkv-sdftools, makemkvcon
 Description: LibreDrive firmware for compatible drives
  LibreDrive firmware for compatible drives. This package is not intended to be
- installed on its own, but is a dependency of libredrive-sdftools. It contains the firmware
- files that libredrive-sdftools can flash to compatible drives.
+ installed on its own, but is a dependency of makemkv-sdftools. It contains the firmware
+ files that makemkv-sdftools can flash to compatible drives.
