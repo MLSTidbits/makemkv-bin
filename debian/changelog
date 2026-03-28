@@ -1,0 +1,301 @@
+makemkvcon (1.18.3) noble; urgency=medium
+
+  * MakeMKV v1.18.3 (25.1.2026)
+
+    Updated LibreDrive and AACS runtime
+    Small improvements and bugfixes
+    Notable bug fixes:
+        Reading certain MKV files as input was very slow
+
+ -- hjmooses <heyarje@gmail.com>  Mon, 26 Jan 2026 08:18:07 +0000
+
+makemkvcon (1.18.2) noble; urgency=medium
+
+  * MakeMKV v1.18.2 (25.9.2025)
+
+    Improved handling for discs with mastering errors
+    Small improvements and bugfixes
+
+ -- hjmooses <heyarje@gmail.com>  Tue, 30 Sep 2025 10:32:56 +0000
+
+makemkvcon (1.18.1) noble; urgency=medium
+
+  * MakeMKV v1.18.1 (5.4.2025)
+
+    Bugfix for 1.18.0
+
+ -- hjmooses <heyarje@gmail.com>  Thu, 10 Apr 2025 17:43:30 +0000
+
+makemkvcon (1.18.0) noble; urgency=medium
+
+  * MakeMKV v1.18.0 (4.4.2025)
+
+    Added support for AACS v82
+    Improved handling for discs with mastering errors
+    Fixed crash on Mac OS 15.4
+
+ -- hjmooses <heyarje@gmail.com>  Thu, 10 Apr 2025 17:43:30 +0000
+
+makemkvcon (1.17.9) noble; urgency=medium
+
+  * MakeMKV v1.17.9 (1.2.2025)
+
+    Version bump, no changes
+    Updated translations
+
+ -- hjmooses <heyarje@gmail.com>  Wed, 05 Feb 2025 10:25:36 +0000
+
+makemkvcon (1.17.8) noble; urgency=medium
+
+  * MakeMKV v1.17.8 (30.9.2024)
+
+    Improved handling for discs with mastering errors and with structure protection
+    Small improvements and bugfixes
+    Notable bug fixes:
+      Audio transcoding failed on Linux when built with recent ffmpeg
+
+ -- hjmooses <heyarje@gmail.com>  Mon, 30 Sep 2024 18:24:02 +0000
+
+makemkvcon (1.17.7) noble; urgency=medium
+
+  * MakeMKV v1.17.7 (15.5.2024)
+
+    Version bump, no changes
+
+ -- hjmooses <heyarje@gmail.com>  Thu, 23 May 2024 09:18:58 +0000
+
+makemkvcon (1.17.6) noble; urgency=medium
+
+  * MakeMKV v1.17.6 (20.1.2024)
+    Improved handling for discs with mastering errors
+    Small improvements and bugfixes
+
+ -- hjmooses <heyarje@gmail.com>  Mon, 22 Jan 2024 19:34:56 +0000
+
+makemkvcon (1.17.5) noble; urgency=medium
+
+  * MakeMKV v1.17.5 (25.9.2023)
+
+    Improved handling for discs with mastering errors
+    Fixed several bughs related to HD-DVD handling (just about time...)
+    Fixed Linux ARM64 executabe crashing on certain hardware configurations
+    Small improvements and bugfixes
+
+ -- hjmooses <heyarje@gmail.com>  Mon, 02 Oct 2023 08:37:25 +0000
+
+makemkvcon (1.17.4) noble; urgency=medium
+
+  * MakeMKV v1.17.4 (29.5.2023)
+
+    Added support for AACS v81
+    Small improvements and bugfixes
+    Notable bug fixes:
+        4K BDAV discs with 4K-only content could fail to open
+
+ -- hjmooses <heyarje@gmail.com>  Mon, 12 Jun 2023 06:55:23 +0000
+
+makemkvcon (1.17.3) noble; urgency=medium
+
+  * MakeMKV v1.17.3 (1.2.2023)
+
+    Added support for 4K BDAV discs
+    Small improvements and bugfixes
+    Notable bug fixes:
+        DV HEVC streams with certain encoding were processed in a non-compatible way
+        CellWalk scan faild on some DVDs
+        Linux AArch64 version crashed on Raspberry PI3
+
+ -- hjmooses <heyarje@gmail.com>  Thu, 09 Feb 2023 10:00:47 +0000
+
+makemkvcon (1.17.2) noble; urgency=medium
+
+  * MakeMKV v1.17.2 (10.10.2022 )
+    Improved handling for discs with mastering errors
+    Small improvements and bugfixes
+
+ -- hjmooses <heyarje@gmail.com>  Thu, 13 Oct 2022 10:17:21 +0000
+
+makemkvcon (1.17.1) noble; urgency=medium
+
+  * MakeMKV v1.17.1 (13.7.2022 )
+
+    Small improvements and bugfixes
+    Bug fixes:
+    Program could hang when scanning certain protected DVD discs using CellWallk method
+    Some titles were truncated on DVDs with structure protection, when using CellWallk method
+    Small bugfixes
+    1.17.0 regressions:
+    On some UHD HEVC streams program spitted thousands of invalid "Corrupt" messages, appearing to hang
+    Program crashed decoding certain AC3 (DD) streams, usually during transcoding
+
+ -- hjmooses <heyarje@gmail.com>  Mon, 18 Jul 2022 15:05:45 +0000
+
+makemkvcon (1.17.0) noble; urgency=medium
+
+  * MakeMKV v1.17.0 (27.6.2022 )
+
+    Improved handling for discs with mastering errors
+    A new, rewritten DVD engine - much better handling for discs with structure protection
+    Many internal improvements and small bugfixes
+    Notable Bug fixes:
+    Program failed to recognize some exotic USB drives
+    Program failed on some DVD streams recorded from sattelite feed (TiVO DVD)
+    Program could hang if internet connection wasn't available
+
+ -- hjmooses <heyarje@gmail.com>  Sun, 03 Jul 2022 18:47:37 +0000
+
+makemkvcon (1.16.7) noble; urgency=medium
+
+  * MakeMKV v1.16.7 (27.2.2022 )
+
+    Improved handling for discs with mastering errors
+    Many internal improvements and small bugfixes
+
+ -- hjmooses <heyarje@gmail.com>  Tue, 01 Mar 2022 19:35:17 +0000
+
+makemkvcon (1.16.5) noble; urgency=medium
+
+  * MakeMKV v1.16.5 (1.11.2021 )
+
+    Miscellaneous UI improvements
+    WinCDArb update, fixes occasional "no optical drives" error
+    LibMMBD stability improvements
+    Many small bug-fixes
+
+ -- hjmooses <heyarje@gmail.com>  Thu, 04 Nov 2021 19:20:01 +0000
+
+makemkvcon (1.16.4) noble; urgency=medium
+
+  * MakeMKV v1.16.4 (8.7.2021 )
+
+    Much better support for discs with Java playlist obfuscation
+    Any Java runtime version is now supported, including Java 16
+    Mac OS: Support for Mac OS 12.0 Monterey
+    Some small improvements
+    Bug fixes:
+        Program failed to recognize some AAC streams with exotic channel encoding
+        Picture dimensions were displayed incorrectly for some exotic HEVC streams
+        Conversion of some DVDs could fail at the very end of title
+
+ -- hjmooses <heyarje@gmail.com>  Mon, 19 Jul 2021 13:17:44 +0000
+
+makemkvcon (1.16.3) noble; urgency=medium
+
+  * MakeMKV v1.16.3 (18.3.2021 )
+
+    Bug fixes:
+        Some non-English messages were displayed incorrectly
+        Opening DVD in manual mode from GUI was broken in 1.16.0
+        Some E-AC3 streams with surround channels were ignored when opening M2TS files
+
+ -- hjmooses <heyarje@gmail.com>  Fri, 19 Mar 2021 09:20:52 +0000
+
+makemkvcon (1.16.1) noble; urgency=medium
+
+  * MakeMKV v1.16.1 (4.3.2021 )
+
+    Bug fixes:
+        Mac OS: Program could fail to start
+        Mac OS: ccextractor helper app failed to start
+        Windows XP: Program failed to start
+    Some small improvements
+
+ -- hjmooses <heyarje@gmail.com>  Wed, 10 Mar 2021 14:39:48 +0000
+
+makemkvcon (1.16.0) noble; urgency=medium
+
+  * MakeMKV v1.16.0 (27.2.2021 )
+
+    ARM port, support for Apple silicon, Linux on ARM
+    MMMBD on OSX - support for applications with hardened runtime (Handbrake)
+    Some internal improvements and small bugfixes
+
+ -- hjmooses <heyarje@gmail.com>  Mon, 01 Mar 2021 08:27:52 +0000
+
+makemkvcon (1.15.4) noble; urgency=medium
+
+  * MakeMKV v1.15.4 (8.12.2020 )
+
+    Improved handling for discs with mastering errors
+    Many internal improvements and small bugfixes
+    Implemented seamless joining of TrueHD streams with overlapping frames based on Dominik Mydlil's idea
+    MakeMKV now recognizes and converts double-track Dolby Vision MKV files
+    Bug fixes:
+        Program could fail when processing TrueHD streams from MKV file
+        DTS core was not extracted from DTS-HD streams (1.15.0 regression)
+
+ -- hjmooses <heyarje@gmail.com>  Sun, 13 Dec 2020 16:18:13 +0100
+
+makemkvcon (1.15.3) noble; urgency=medium
+
+  * MakeMKV v1.15.3 (1.10.2020 )
+
+    Massive internal rewrite, many bugfixes
+    Improved handling for discs with mastering errors
+    Brand new network code, it is now possible to set proxy server in preferences, to access network over TOR/VPN
+    MakeMKV now can extract Dolby Vision metadata from elementary stream data and rebuild missing or invalid DV descriptors
+    Drive speed control update - MakeMKV now forces low speed when reading data around disc edges, working around firmware bugs
+    Bug fixes:
+        Program could hang or crash when converting files with many audio streams
+        On some multi-segment sources with LPCM audio program failed to produce MKV file
+        Program could crash when producing testdump or when conversion failed
+        On 32-bit x86 system program could run out of memory on big mult-segment sources
+
+ -- hjmooses <heyarje@gmail.com>  Wed, 07 Oct 2020 07:47:01 +0000
+
+makemkvcon (1.15.2) noble; urgency=medium
+
+  * MakeMKV v1.15.2 (20.7.2020 )
+
+    Massive internal rewrite, some improvements and small bugfixes
+    Muxer updated to the latest matroska specification
+    Advanced usage changes:
+        Sdftool included as standalone executable
+        Drive speed control option
+
+ -- hjmooses <heyarje@gmail.com>  Thu, 23 Jul 2020 07:55:28 +0200
+
+makemkvcon (1.15.1) noble; urgency=medium
+
+  * MakeMKV v1.15.1 (15.4.2020 )
+
+    Added support for AACS v76 (for those poor souls without LibreDrive)
+    Improved handling for discs with mastering errors
+    Many internal improvements and small bugfixes
+    Bug fixes:
+        For some HD audio streams frames were dropped incorrectly on segment boundaries
+
+ -- hjmooses <heyarje@gmail.com>  Sat, 18 Apr 2020 20:39:14 +0200
+
+makemkvcon (1.15.0) noble; urgency=medium
+
+  * MakeMKV v1.15.0 (3.3.2020 )
+
+    User interface update
+    New preferences page for LibMMBD integation
+    Improved handling for discs with mastering errors
+    Better tolerance for corrupted input data
+    Many internal improvements
+
+ -- hjmooses <heyarje@gmail.com>  Fri, 06 Mar 2020 18:44:15 +0000
+
+makemkvcon (1.14.7) noble; urgency=medium
+
+  * MakeMKV v1.14.7 (4.12.2019 )
+
+    Bug fixes:
+        Better compatibility for decrypted AACS 2.1 FMTS files
+        Fixed variable expansion bug for default file name template
+
+ -- hjmooses <heyarje@gmail.com>  Mon, 09 Dec 2019 09:56:12 +0000
+
+makemkvcon (1.14.5) noble; urgency=medium
+
+  * MakeMKV v1.14.5 (9.6.2019 )
+
+    Some small miscellaneous improvements
+
+ -- hjmooses <heyarje@gmail.com>  Mon, 09 Sep 2019 07:06:26 +0000
+
+# Older entries have been removed from this changelog.
+# To read the complete changelog use `apt changelog makemkvcon`.
