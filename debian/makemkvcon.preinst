@@ -1,0 +1,20 @@
+#!/bin/sh
+set -e
+#!/bin/sh
+
+set -e
+
+case "$1" in
+    configure|upgrade                            )
+
+        echo "EULA_ACCEPTED=true" > /etc/makemkv/eula.conf
+
+    ;;
+    failed-upgrade                               ) ;;
+    abort-upgrade|abort-deconfigure|abort-remove ) ;;
+    *                                            )
+        echo "Unsupported option $1" ; exit 1
+    ;;
+esac
+
+exit 0
