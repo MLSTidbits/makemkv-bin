@@ -12,8 +12,8 @@ Rules-Requires-Root: no
 
 Package: makemkvcon
 Architecture: amd64
-Depends: reel, libmakemkv-oss
-Suggests: makemkvcon-docs, makemkv-sdftools, makemkv-firmware
+Depends: libmakemkv-oss
+Suggests: makemkv-sdftools, makemkv-firmware
 Description: MakeMKVCON is the command-line interface for MakeMKV
  MakeMKV is a format converter, otherwise known as "transcoder". It converts
  the video clips from proprietary (and usually encrypted) disc into a set of
@@ -21,14 +21,6 @@ Description: MakeMKVCON is the command-line interface for MakeMKV
  and preserve chapters. There are many players that can play MKV files nearly
  on all platforms, and there are tools to convert MKV files to many formats,
  including Blu-ray and DVD discs.
-
-Package: makemkvcon-docs
-Architecture: all
-Depends: makemkvcon
-Description: Documentation for makemkvcon
- Documentation for makemkvcon. This package is not intended to be installed on
- its own but is a dependency of makemkvcon. It contains the documentation files
- for makemkvcon.
 
 Package: libmakemkv-oss
 Architecture: amd64

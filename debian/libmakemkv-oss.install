@@ -1,0 +1,6 @@
+_build/libdriveio.so.0 usr/lib/
+_build/libmakemkv.so.1 usr/lib/
+_build/libmmbd.so.0 usr/lib/
+
+_build/mmccextr usr/bin/
+_build/mmgplsrv usr/bin/

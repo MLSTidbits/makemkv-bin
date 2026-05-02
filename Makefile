@@ -10,6 +10,10 @@ include libmakemkv/libmakemkv.mk
 include libmmbd/libmmbd.mk
 include mmgpl/mmgpl.mk
 
+BUILD_DIR = _build
+DOC_DIR = doc
+MAN_DIR = man
+
 GCC=gcc
 GXX=g++ -std=c++11
 
@@ -49,15 +53,33 @@ LIBABI_OBJ   := $(patsubst %,tmp/%.o,$(LIBABI_SRC))
 LIBFFABI_OBJ := $(patsubst %,tmp/%.o,$(LIBFFABI_SRC))
 MMCCX_SRC    := $(patsubst %,mmccextr/%,$(MMCCEXTR_SRC))
 
+DOCS = README.md \
+	CODE_OF_CONDUCT.md \
+	CONTRIBUTING.md \
+	doc/version \
+	doc/copyright \
+	doc/eula
+
 .PHONY: all clean install \
 	_build/libdriveio.so.0 \
 	_build/libmakemkv.so.1\
 	_build/libmmbd.so.0\
 	_build/mmccextr\
 	_build/mmgplsrv \
-	_build/makemkvcon
+	_build/makemkvcon \
+	_build/man \
+	_build/data \
+	_build/doc
 
-all: _build/libdriveio.so.0 _build/libmakemkv.so.1 _build/libmmbd.so.0 _build/mmccextr _build/mmgplsrv _build/makemkvcon
+all: _build/libdriveio.so.0 \
+	_build/libmakemkv.so.1 \
+	_build/libmmbd.so.0 \
+	_build/mmccextr \
+	_build/mmgplsrv \
+	_build/makemkvcon \
+	_build/man \
+	_build/data \
+	_build/doc
 
 clean:
 	@rm -vrf _build tmp
@@ -77,7 +99,7 @@ endif
 	$(INSTALL) -D -m 755 _build/mmccextr         $(DESTDIR)$(bindir)/mmccextr
 	$(INSTALL) -D -m 755 _build/mmgplsrv         $(DESTDIR)$(bindir)/mmgplsrv
 
-# ── Finalise — strip (release) or copy (debug) into _build/ ──────────────── #
+# ── Finalize — strip (release) or copy (debug) into _build/ ──────────────── #
 
 _build/libdriveio.so.0: libdriveio/libdriveio.so.0.full
 	@mkdir -p _build
@@ -133,6 +155,31 @@ _build/makemkvcon:
 	@mkdir -p _build
 	@echo "\e[1;32mCP\e[0m  $@"
 	@cp bin/makemkvcon _build/
+
+_build/man:
+	@mkdir -p $@
+	@if ! command -v pandoc >/dev/null 2>&1; then \
+		echo 'pandoc could not be found. Please install pandoc to build the manual page.'; \
+		exit 1; \
+	fi
+
+	@for manpage in $(MAN_DIR)/*.md ; do \
+		output=$@/$$(basename "$${manpage%.md}"); \
+		echo "\e[1;32mMD\e[0m  $@/$$(basename "$${manpage%.md}")"; \
+		pandoc -s -t man -o "$$output" "$$manpage"; \
+	done
+
+_build/data:
+	@mkdir -p $@
+	@echo "\e[1;32CP\e[0m $@"
+
+_build/doc:
+	@mkdir -p build/doc
+
+	@for d in $(DOCS) ; do
+		echo echo "\e[1;32mCP\e[0m $$d"
+		cp $$d _build/doc
+	done
 
 # ── Compile unstripped binaries into source directories ───────────────────── #
 
@@ -247,6 +294,3 @@ tmp/gen_buildinfo.h:
 	@mkdir -p tmp
 	@printf '#define BUILDINFO_ARCH_NAME "%s"\n#define BUILDINFO_BUILD_DATE "%s"\n' \
 		"$(BUILDINFO_ARCH_NAME)" "$(BUILDINFO_BUILD_DATE)" > $@
-
-_build/makemkv-bin:
-	@cp bin/makemkvcon _build

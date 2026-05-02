@@ -22,6 +22,7 @@ debian/.debhelper/
 
 debian/*.substvars
 debian/files
+debian/changelog
 
 build-stamp
 

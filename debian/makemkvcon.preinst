@@ -1,13 +1,30 @@
-#!/bin/sh
-set -e
-#!/bin/sh
+#!/bin/env sh
 
 set -e
 
 case "$1" in
     configure|upgrade                            )
 
-        echo "EULA_ACCEPTED=true" > /etc/makemkv/eula.conf
+        if [ -f /etc/makemkv/eula.conf ]; then
+            # shellcheck disable=SC3046
+            source /etc/makemkv/eula.conf 2>/dev/null || true
+        fi
+
+        if [ "$EULA_ACCEPTED" != "true" ] || [ -z "$EULA_ACCEPTED" ]; then
+            curl -s https://raw.githubusercontent.com/MLSTidbits/makemkvcon/refs/heads/main/doc/eula | more
+            echo "MakeMKV requires acceptance of the EULA (End User License Agreement) to continue installation. Do you accept? [y/N] "
+            read -r RESPONSE
+            case "$RESPONSE" in
+                [yY][eE][sS]|[yY]   )
+                    mkdir -p /etc/makemkv
+                    echo "EULA_ACCEPTED=true" | tee /etc/makemkv/eula.conf > /dev/null
+                ;;
+                *                   )
+                    echo "EULA not accepted, aborting installation"
+                    exit 1
+                ;;
+            esac
+        fi
 
     ;;
     failed-upgrade                               ) ;;
@@ -16,5 +33,3 @@ case "$1" in
         echo "Unsupported option $1" ; exit 1
     ;;
 esac
-
-exit 0
