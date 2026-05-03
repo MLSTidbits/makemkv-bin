@@ -26,6 +26,8 @@ debian/changelog
 
 build-stamp
 
+CLAUDE.md
+
 _build/
 
 *.full
