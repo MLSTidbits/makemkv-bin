@@ -6,12 +6,12 @@ Debian packaging for [MakeMKV](https://www.makemkv.com/) CLI tools targeting Ubu
 
 ## Packages
 
-| Package | Description |
-|---------|-------------|
-| `makemkvcon` | MakeMKV command-line interface binary and runtime data |
-| `libmakemkv-oss` | Open-source shared libraries and helper binaries (`mmccextr`, `mmgplsrv`) |
-| `makemkv-sdftools` | `sdftool` utility for flashing LibreDrive firmware to compatible drives |
-| `makemkv-firmware` | LibreDrive firmware files for supported internal and slim optical drives |
+| Package            | Description                                                               |
+| ------------------ | ------------------------------------------------------------------------- |
+| `makemkvcon`       | MakeMKV command-line interface binary and runtime data                    |
+| `libmakemkv-oss`   | Open-source shared libraries and helper binaries (`mmccextr`, `mmgplsrv`) |
+| `makemkv-sdftools` | `sdftool` utility for flashing LibreDrive firmware to compatible drives   |
+| `makemkv-firmware` | LibreDrive firmware files for supported internal and slim optical drives  |
 
 ## EULA
 

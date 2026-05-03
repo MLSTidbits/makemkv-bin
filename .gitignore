@@ -11,10 +11,13 @@ md5sums
 
 src/makemkv/tmp/
 
-debian/makemkvcon-*/
-debian/makemkv-*/
 debian/makemkvcon/
-debian/libmakemkv-*/
+debian/makemkvcon-docs/
+
+debian/libredrive-tools
+debian/libredrive-tools-docs
+
+debian/libmakemkv-oss
 
 tmp/
 
