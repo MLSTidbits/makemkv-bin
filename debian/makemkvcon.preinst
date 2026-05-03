@@ -3,7 +3,7 @@
 set -e
 
 case "$1" in
-    configure|upgrade                            )
+    configure|upgrade|install                     )
 
         if [ -f /etc/makemkv/eula.conf ]; then
             # shellcheck disable=SC3046
