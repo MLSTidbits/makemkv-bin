@@ -171,14 +171,14 @@ _build/man:
 
 _build/data:
 	@mkdir -p $@
-	@echo "\e[1;32CP\e[0m $@"
+	@echo "\e[1;32mCP\e[0m $@"
+	@cp -R data/* $@/
 
 _build/doc:
-	@mkdir -p build/doc
-
-	@for d in $(DOCS) ; do
-		echo echo "\e[1;32mCP\e[0m $$d"
-		cp $$d _build/doc
+	@mkdir -p $@
+	@for d in $(DOCS) ; do \
+		echo "\e[1;32mCP\e[0m $$d"; \
+		cp $$d $@/; \
 	done
 
 # ── Compile unstripped binaries into source directories ───────────────────── #
