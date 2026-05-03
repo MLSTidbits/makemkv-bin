@@ -44,7 +44,8 @@ Description: Manual page/pages for SDFTools used for flashing LibreDrive
 
 Package: libredrive-tools
 Architecture: all
-Depends: makemkv-sdftools, makemkvcon
+Depends: makemkvcon
+Suggests: libredrive-tools-docs
 Description: LibreDrive tools kits (firmware and executable)
  LibreDrive firmware for compatible drives. This package is not intended to be
  installed on its own, but is a dependency of makemkv-sdftools. It contains the firmware
