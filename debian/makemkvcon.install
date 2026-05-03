@@ -1,7 +1,7 @@
-_build/makemkvcon usr/bin/
+_build/bin/makemkvcon usr/bin/
 
-data/appdata.tar usr/share/MakeMKV/
-data/blues.jar usr/share/MakeMKV/
-data/blues.policy usr/share/MakeMKV/
+_build/data/appdata.tar usr/share/MakeMKV/
+_build/data/blues.jar usr/share/MakeMKV/
+_build/data/blues.policy usr/share/MakeMKV/
 
-conf/eula.conf /etc/makemkv/
+debian/eula.conf /etc/makemkv/

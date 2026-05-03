@@ -13,7 +13,8 @@ Rules-Requires-Root: no
 Package: makemkvcon
 Architecture: amd64
 Depends: libmakemkv-oss
-Suggests: makemkv-sdftools, makemkv-firmware
+Suggests:
+    makemkv-firmware, makemkv-docs, makemkv-sdftools, libredrive-firmware
 Description: MakeMKVCON is the command-line interface for MakeMKV
  MakeMKV is a format converter, otherwise known as "transcoder". It converts
  the video clips from proprietary (and usually encrypted) disc into a set of
@@ -21,6 +22,12 @@ Description: MakeMKVCON is the command-line interface for MakeMKV
  and preserve chapters. There are many players that can play MKV files nearly
  on all platforms, and there are tools to convert MKV files to many formats,
  including Blu-ray and DVD discs.
+
+Package: makemkvcon-docs
+Architecture: amd64
+Depends: makemkvcon
+Suggests: makemkvcon
+Description: Manual page/pages for MakeMKVCON used for cli commands
 
 Package: libmakemkv-oss
 Architecture: amd64
@@ -30,16 +37,15 @@ Description: Library and binaries for makemkvcon used to decrypt video
  helper binaries used by makemkvcon to decrypt video. Allowing use of third-party
  a backend decryption applications.
 
-Package: makemkv-sdftools
+Package: libredrive-tools-docs
 Architecture: amd64
-Depends: makemkvcon
-Description: SDFTools is a application to flash LibreDrive firmware
- SDFTools is a application to flash LibreDrive firmware with compatible drives.
+Depends: makemkv-sdftools
+Description: Manual page/pages for SDFTools used for flashing LibreDrive
 
-Package: makemkv-firmware
+Package: libredrive-tools
 Architecture: all
 Depends: makemkv-sdftools, makemkvcon
-Description: LibreDrive firmware for compatible drives
+Description: LibreDrive tools kits (firmware and executable)
  LibreDrive firmware for compatible drives. This package is not intended to be
  installed on its own, but is a dependency of makemkv-sdftools. It contains the firmware
  files that makemkv-sdftools can flash to compatible drives.
