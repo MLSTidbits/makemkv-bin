@@ -66,7 +66,7 @@ DOCS = README.md \
 	_build/libmmbd.so.0\
 	_build/mmccextr\
 	_build/mmgplsrv \
-	_build/makemkvcon \
+	_build/bin \
 	_build/man \
 	_build/data \
 	_build/doc
@@ -76,7 +76,7 @@ all: _build/libdriveio.so.0 \
 	_build/libmmbd.so.0 \
 	_build/mmccextr \
 	_build/mmgplsrv \
-	_build/makemkvcon \
+	_build/bin \
 	_build/man \
 	_build/data \
 	_build/doc
@@ -151,10 +151,10 @@ else
 	@cp $< $@
 endif
 
-_build/makemkvcon:
-	@mkdir -p _build
+_build/bin:
+	@mkdir -p $@
 	@echo "\e[1;32mCP\e[0m  $@"
-	@cp bin/makemkvcon _build/
+	@cp -f bin/* $@/
 
 _build/man:
 	@mkdir -p $@
