@@ -25,6 +25,10 @@ prefix=/usr
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 bindir=${exec_prefix}/bin
+datarootdir=${prefix}/share
+datadir=${datarootdir}/MakeMKV
+mandir=${datarootdir}/man
+firmwaredir=${libdir}/libredrive/firmware
 FFMPEG_CFLAGS=-I/usr/include/x86_64-linux-gnu
 FFMPEG_LIBS=-lavcodec -lavutil -lrt
 ENABLE_DEBUG=no
@@ -89,15 +93,30 @@ clean:
 	@rm -vf mmccextr/mmccextr.full
 	@rm -vf mmgpl/mmgplsrv.full
 
-install: _build/libdriveio.so.0 _build/libmakemkv.so.1 _build/libmmbd.so.0 _build/mmccextr _build/mmgplsrv
-	$(INSTALL) -D -m 644 _build/libdriveio.so.0  $(DESTDIR)$(libdir)/libdriveio.so.0
-	$(INSTALL) -D -m 644 _build/libmakemkv.so.1  $(DESTDIR)$(libdir)/libmakemkv.so.1
-	$(INSTALL) -D -m 644 _build/libmmbd.so.0     $(DESTDIR)$(libdir)/libmmbd.so.0
+install: _build/libdriveio.so.0 _build/libmakemkv.so.1 _build/libmmbd.so.0 \
+	_build/mmccextr _build/mmgplsrv _build/makemkvcon _build/man _build/data
+	$(INSTALL) -D -m 755 _build/makemkvcon        $(DESTDIR)$(bindir)/makemkvcon
+	$(INSTALL) -D -m 755 bin/sdftool              $(DESTDIR)$(bindir)/sdftool
+	$(INSTALL) -D -m 644 _build/libdriveio.so.0   $(DESTDIR)$(libdir)/libdriveio.so.0
+	$(INSTALL) -D -m 644 _build/libmakemkv.so.1   $(DESTDIR)$(libdir)/libmakemkv.so.1
+	$(INSTALL) -D -m 644 _build/libmmbd.so.0      $(DESTDIR)$(libdir)/libmmbd.so.0
 ifeq ($(DESTDIR),)
 	ldconfig
 endif
-	$(INSTALL) -D -m 755 _build/mmccextr         $(DESTDIR)$(bindir)/mmccextr
-	$(INSTALL) -D -m 755 _build/mmgplsrv         $(DESTDIR)$(bindir)/mmgplsrv
+	$(INSTALL) -D -m 755 _build/mmccextr          $(DESTDIR)$(bindir)/mmccextr
+	$(INSTALL) -D -m 755 _build/mmgplsrv          $(DESTDIR)$(bindir)/mmgplsrv
+	$(INSTALL) -D -m 644 _build/data/appdata.tar  $(DESTDIR)$(datadir)/appdata.tar
+	$(INSTALL) -D -m 644 _build/data/blues.jar    $(DESTDIR)$(datadir)/blues.jar
+	$(INSTALL) -D -m 644 _build/data/blues.policy $(DESTDIR)$(datadir)/blues.policy
+	@for f in data/Internal/*; do \
+		$(INSTALL) -D -m 644 "$$f" "$(DESTDIR)$(firmwaredir)/internal/$$(basename $$f)"; \
+	done
+	@for f in data/Slim/*; do \
+		$(INSTALL) -D -m 644 "$$f" "$(DESTDIR)$(firmwaredir)/slim/$$(basename $$f)"; \
+	done
+	@for f in _build/man/*.1; do \
+		$(INSTALL) -D -m 644 "$$f" "$(DESTDIR)$(mandir)/man1/$$(basename $$f)"; \
+	done
 
 # ── Finalize — strip (release) or copy (debug) into _build/ ──────────────── #
 
